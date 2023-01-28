@@ -1,0 +1,42 @@
+from data_structures import queue
+
+class BreadthFirstSearch:
+    def __init__(self, G):
+        self.graph = G.graph
+    
+    def graph_traversal(self, start_node):
+        visited = list()
+        Q = queue()
+        Q.enqueue(start_node)
+        while len(Q) != 0:
+            current_node = Q.dequeue()
+            for neighbor_node in self.graph[current_node]:
+                if neighbor_node in Q.queue or neighbor_node in visited:
+                    continue
+                Q.enqueue(neighbor_node)
+            visited.append(current_node)
+        return visited
+
+    def shortest_path(self, start_node, end_node):
+        prev = [None] * len(self.graph)
+        prev[start_node - 1] = 'null'
+        
+        visited = list()
+        Q = queue()
+        Q.enqueue(start_node)
+        while len(Q) != 0:
+            current_node = Q.dequeue()
+            for neighbor_node in self.graph[current_node]:
+                if neighbor_node in Q.queue or neighbor_node in visited:
+                    continue
+                Q.enqueue(neighbor_node)
+                prev[neighbor_node - 1] = current_node
+            visited.append(current_node)
+        
+        path = [end_node]
+        while path[0] != start_node:
+            if path[0] == 'null': continue
+            if prev[path[0] - 1] == None:
+                return list()
+            path = [prev[path[0] - 1]] + path
+        return path
