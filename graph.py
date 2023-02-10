@@ -2,6 +2,8 @@ class Graph:
     
     def __init__(self):
         self.graph = dict()
+        self.V = list() # vertex list
+        self.E = list() # edge list
     
     def __str__(self):
         res = ''
@@ -16,6 +18,7 @@ class UndirectedGraph(Graph):
                 print(vertex, 'is already an existing vertex.')
             else:
                 self.graph[vertex] = list()
+                self.V.append(vertex)
     
     def add_edge(self, E: list):
         for (first_endpoint, second_endpoint) in E:
@@ -32,7 +35,9 @@ class UndirectedGraph(Graph):
                 self.graph[first_endpoint].sort()
                 self.graph[second_endpoint].append(first_endpoint)
                 self.graph[second_endpoint].sort()
-    
+                self.E.append((first_endpoint, second_endpoint))
+                self.E.append((second_endpoint, first_endpoint))
+
     def show_graph(self):
         import networkx as nx
         import matplotlib.pyplot as plt
@@ -54,8 +59,10 @@ class DirectedGraph(Graph):
                 print(vertex, 'is already an existing vertex.')
             else:
                 self.graph[vertex] = list()
+                self.V.append(vertex)
     
     def add_edge(self, E: list):
+        self.E.extend(E)
         for (initial, terminal) in E:
             if initial not in self.graph:
                 print(initial, 'is not an existing vertex.')
@@ -66,6 +73,7 @@ class DirectedGraph(Graph):
             else:
                 self.graph[initial].append(terminal)
                 self.graph[initial].sort()
+                self.E.append((initial, terminal))
     
     def show_graph(self):
         import networkx as nx
@@ -85,6 +93,8 @@ class WeightedDirectedGraph(Graph):
     def __init__(self):
         self.graph = dict()
         self.unweighted_graph = DirectedGraph()
+        self.V = list() # vertex list
+        self.E = list() # edge list
     
     def add_vertex(self, V: list):
         for vertex in V:
@@ -92,6 +102,7 @@ class WeightedDirectedGraph(Graph):
                 print(vertex, 'is already an existing vertex.')
             else:
                 self.graph[vertex] = list()
+                self.V.append(vertex)
     
     def add_edge(self, E: list):
         for (initial, terminal, weight) in E:
@@ -104,6 +115,7 @@ class WeightedDirectedGraph(Graph):
             else:
                 self.graph[initial].append((terminal, weight))
                 self.graph[initial].sort()
+                self.E.append((initial, terminal, weight))
     
     def show_graph(self):
         import networkx as nx
@@ -138,13 +150,16 @@ class WeightedUndirectedGraph(Graph):
     def __init__(self):
         self.graph = dict()
         self.unweighted_graph = UndirectedGraph()
-    
+        self.V = list() # vertex list
+        self.E = list() # edge list
+
     def add_vertex(self, V: list):
         for vertex in V:
             if vertex in self.graph:
                 print(vertex, 'is already an existing vertex.')
             else:
                 self.graph[vertex] = list()
+                self.V.append(vertex)
     
     def add_edge(self, E: list):
         for (first_endpoint, second_endpoint, weight) in E:
@@ -161,6 +176,8 @@ class WeightedUndirectedGraph(Graph):
                 self.graph[first_endpoint].sort()
                 self.graph[second_endpoint].append((first_endpoint, weight))
                 self.graph[second_endpoint].sort()
+                self.E.append((first_endpoint, second_endpoint, weight))
+                self.E.append((second_endpoint, first_endpoint, weight))
     
     def show_graph(self):
         import networkx as nx
