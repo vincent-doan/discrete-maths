@@ -3,6 +3,8 @@ from data_structures import queue
 class BreadthFirstSearch:
     def __init__(self, G):
         self.graph = G.graph
+        self.V = G.V
+        self.E = G.E
     
     def graph_traversal(self, start_node):
         visited = list()
@@ -18,7 +20,7 @@ class BreadthFirstSearch:
         return visited
 
     def shortest_path(self, start_node, end_node):
-        prev = [None] * len(self.graph)
+        prev = [None] * len(self.V)
         prev[start_node - 1] = 'null'
         
         visited = list()
@@ -40,3 +42,24 @@ class BreadthFirstSearch:
                 return list()
             path = [prev[path[0] - 1]] + path
         return path
+    
+    def count_connected_components(self):
+        id = [0] * len(self.V)
+        count = 0
+        for start_node in self.V:
+            if id[start_node - 1] != 0: continue
+            count += 1
+            visited = list()
+            Q = queue()
+            Q.enqueue(start_node)
+            id[start_node - 1] = count
+            while len(Q) != 0:
+                current_node = Q.dequeue()
+                for neighbor_node in self.graph[current_node]:
+                    if neighbor_node in Q.queue or neighbor_node in visited:
+                        continue
+                    Q.enqueue(neighbor_node)
+                    id[neighbor_node - 1] = count
+                visited.append(current_node)
+        print(id)
+        return count
