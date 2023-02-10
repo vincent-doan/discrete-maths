@@ -1,14 +1,50 @@
 # discrete-maths
 
 ## preliminaries
-**data_structures.py** contains classes of data structures: queue, stack, priority queue<br>
-**graph.py** contains classes of graphs: (un)directed (un)weighted graphs; weighted graphs have corresponding unweighted graphs as getable attributes; .show_graph() uses *networkx* to draw graphs
+**data_structures.py**<br>
+contains classes of data structures:<br>
+- queue<br>
+- stack<br>
+- priority queue<br>
+**graph.py**<br>
+contains classes of graphs:<br>
+- undirected unweighted graphs<br>
+- directed unweighted graphs<br>
+- undirected weighted graphs<br>
+- directed weighted graphs<br>
+<br>
+each type of graph contains:<br>
+- add_vertex(V:list)<br>
+- add_egde(E:list)<br>
+- show_graph() uses *networkx* to draw graphs<br>
+- (weighted graphs) get_unweighted_graphs()<br>
 
 ## algorithms
-**bfs.py** contains class BreadthFirstSearch: graph_traversal & shortest_path<br>
-**dfs.py** contains class DepthFirstSearch: graph_traversal & path<br>
-**dijkstra.py** contains class DijkstraAlgorithm: optimal_path<br>
-**hamilton.py** contains class UnweightedHamilton: enumerate_hamilton_paths & enumerate_hamilton_cycles (using ***backtracking***); contains class WeightedHamilton: enumerate_hamilton_weighted_paths & enumerate_hamilton_weighted_cycles & optimal_hamilton_weighted_path & optimal_hamilton_weighted_cycle (using ***branch-and-bound***)
+**bfs.py**<br>
+contains class BreadthFirstSearch:<br>
+- graph_traversal(start_node)<br>
+- shortest_path(start_node, end_node)<br>
+- count_connected_components()<br>
+**dfs.py**<br>
+contains class DepthFirstSearch:<br>
+- graph_traversal(start_node)<br>
+- path(start_node, end_node)<br>
+- get_timestamp()<br>
+- get_tree_edges()<br>
+- detect_cycle()<br>
+**dijkstra.py** 
+contains class DijkstraAlgorithm:<br>
+- optimal_path(start_node, end_node)<br>
+**hamilton.py** 
+contains class UnweightedHamilton:<br>
+- enumerate_hamilton_paths()<br>
+- enumerate_hamilton_cycles(start_node) (using ***backtracking***)<br>
+<br>
+contains class WeightedHamilton:<br>
+- enumerate_hamilton_weighted_paths()<br>
+- enumerate_hamilton_weighted_cycles(start_node)<br>
+- optimal_hamilton_weighted_path() (using ***branch-and-bound***)<br>
+- optimal_hamilton_weighted_cycle(start_node) (using ***branch-and-bound***)<br>
 
 ## running
 **sample-graphs.py** contains examples of readily-used graphs<br>
